@@ -9,6 +9,7 @@ import Banner from './components/Banner';
 import Cart from './components/Cart';
 import Home from './components/Home';
 import UserState from "./context/UserState";
+import Product from "./components/Product";
 
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
       <Header2 />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<Product />} />
           <Route path="cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>

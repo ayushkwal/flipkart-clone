@@ -22,7 +22,23 @@ app.use(cors());
 //to handle all login/logout routes
 app.use('/',authRoutes);
 
+//To fetch Products
+app.post('/products',async(req,res)=>{
+    const products = await Product.find({});
+    console.log(products);
+    return res.json(products)
 
+})
+app.get('/products',async(req,res)=>{
+    const products = await Product.find({});
+    console.log(products);
+    return res.json(products)
+})
+app.get('/productinfo/:id',async(req,res)=>{
+    const product = await Product.findOne({id:req.params.id});
+    console.log(product,'is your product complete detail');
+    return res.json(product)
+})
 app.get('/home',(req,res)=>res.render('abc.ejs'))
 
 

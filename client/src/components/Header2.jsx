@@ -38,7 +38,9 @@ const Header2 = () => {
     };
     const logodiv = {
         width: "85px",
-        height: "75px"
+        height: "75px",
+        textDecoration:"none",
+        
     };
     const logo = {
         width: "75px",
@@ -50,7 +52,8 @@ const Header2 = () => {
         margin: "0px",
         color: "white",
         fontSize: "13px",
-        marginTop: "-7px"
+        marginTop: "-7px",
+        fontFamily:"cursive"
     };
     const searchbar = {
         height: "30px",
