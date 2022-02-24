@@ -42,9 +42,6 @@ const ProductBanner = () => {
     justifyContent: "center"
   }
   return (
-
-
-
     <Carousel
       infinite={true}
       autoPlaySpeed={1000}

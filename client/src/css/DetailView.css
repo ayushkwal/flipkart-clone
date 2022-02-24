@@ -1,4 +1,22 @@
 #title{
-    color:'red';
-    background-color:red
+}
+#det{
+    min-height: 100vh;
+    margin-top: 50px;
+}
+#shortTitle{
+    color:gray;
+    text-transform: uppercase;
+    font-weight: 600;
+    height:20px;
+    margin-bottom:0px
+}
+#longTitle{
+    color:black;
+}
+#rating{
+    background-color: rgb(37, 172, 37);
+    color:white;
+    padding:1px 7px;
+    border-radius: 8px;
 }

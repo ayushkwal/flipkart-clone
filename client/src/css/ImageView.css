@@ -1,0 +1,22 @@
+#buynowbtn{
+    width:"80px";
+    background: #fb641b;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+    border: none;
+    color: #fff;
+    padding:17px 48px;
+}
+
+#addcartbtn{
+    width:"80px";
+    background: #ff9f00;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+    border: none;
+    color: #fff;
+    padding:15px 35px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+#btndiv{
+    margin-top: 20px;
+}

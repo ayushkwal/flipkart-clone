@@ -39,7 +39,6 @@ app.get('/productinfo/:id',async(req,res)=>{
     console.log(product,'is your product complete detail');
     return res.json(product)
 })
-app.get('/home',(req,res)=>res.render('abc.ejs'))
 
 
 
