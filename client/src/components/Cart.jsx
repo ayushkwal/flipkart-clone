@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
 import '../css/Cart.css'
+import { useContext } from 'react';
 import { Link } from 'react-router-dom'
+import Dialog from '@mui/material/Dialog';
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../actions";
+import Axios from 'axios'
+import userContext from '../context/userContext';
 const Cart = () => {
+
+
+    //getting value of userStatus whether User is Logged in or not
+    const a = useContext(userContext);
+    console.log(a, 'is user status')
+
 
     const dispatch = useDispatch();
     var orders = useSelector((state) => state.AddProductToCartReducer);
     const [price, setPrice] = useState(0);
     const [discount, setDiscount] = useState(0);
+    const [productid, setProductid] = useState('');
+    const [open, setOpen] = useState(false);
+    const [removecondition, setRemovecondition] = useState(false);
     useEffect(() => {
         var priceNow = 0, discountNow = 0;
         orders.map((order) => {
@@ -21,30 +34,177 @@ const Cart = () => {
         setDiscount(discountNow);
     }, [orders])
 
-    const removeproduct = (id) => {
-        console.log('Wanna remove product:', id)
-        console.log(orders);
-        dispatch(removeFromCart(id));
-        console.log(orders);
+
+    const removeproduct = () => {
+
+        dispatch(removeFromCart(productid));
+        setOpen(false)
 
     }
+    const handleClose = () => {
+        setOpen(false)
+    }
+
+    // const paymentHandler = async (e) => {
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+        const placeMyOrder = async (mrp) => {
+   
+   
+        const API_URL = `http://localhost:5000/`
+        const orderUrl = `${API_URL}order`;
+        const response = await Axios.get(orderUrl);
+        const { data } = response;
+        console.log("App -> razorPayPaymentHandler -> data", data)
+        console.log("response", response)
+        
+        const options = {
+          key: 'rzp_test_oj6JRa6Lzk7GO2',
+          name: "avdojo",
+          description: "avodojo",
+        //   order_id: data.id,
+          handler: async (response) => {
+            try {
+             const paymentId = response.razorpay_payment_id;
+             const url = `${API_URL}capture/${paymentId}`;
+             const captureResponse = await Axios.post(url, {})
+             const successObj = JSON.parse(captureResponse.data)
+             const captured = successObj.captured;
+             console.log("App -> razorPayPaymentHandler -> captured", successObj)
+             if(captured){
+                 console.log('success')
+             }
+             
+            } catch (err) {
+              console.log(err);
+            }
+          },
+          theme: {
+            color: "#686CFD",
+          },
+        };
+        const rzp1 = new window.Razorpay(options);
+        // rzp1.createPayment(options);
+        rzp1.open();
+   
+    }
+   
+    // const placeMyOrder = async (mrp) => {
+
+    //     const response = await fetch(`/order/${mrp}`,{
+    //         method:'post',
+            
+    //     });
+    //     const { data } = response;
+    //     const options = {
+    //         key: 'rzp_test_oj6JRa6Lzk7GO2',
+    //         name: "FlipkartClone",
+    //         description: "Thankyou for ordering from flipkartclone. We are always happy to provide you the fast, secure and door-step service.",
+
+    //         handler: async (response) => {
+    //             try {
+    //                 const paymentId = response.razorpay_payment_id;
+    //                 console.log(paymentId,'is pid')
+    //                 const url = `/capture/${paymentId}`;
+    //                 const captureResponse = await fetch(url, {
+    //                     method: 'post'
+                        
+                        
+    //                 })
+    //                 console.log(captureResponse.data);
+    //             } catch (err) {
+    //                 console.log(err);
+    //             }
+    //         },
+    //         theme: {
+    //             color: "rgb(251, 100, 27)",
+    //         },
+    //     };
+    //     const rzp1 = new window.Razorpay(options);
+    //     rzp1.open();
+    // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     return (
         orders.length == 0 ?
             <>
-                <div id="cartboxouter" style={{ backgroundColor: "#f1f3f6" }}>
+
+                <Dialog
+                    open={open} onClose={handleClose}>
+                    <div style={{ width: "380px", height: "190px", borderRadius: "12px", padding: "10px 15px" }}>
+                        <p style={{ fontWeight: "600", height: "40px" }}>Remove Item</p>
+                        <p style={{ color: 'gray' }}>Are you sure you want to remove this item?</p>
+                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
+                            <button onClick={() => setOpen(false)} style={{ padding: "10px 30px", outline: "none" }}>CANCEL</button>
+                            <button onClick={() => removeproduct()} style={{ padding: "10px 30px", color: "white", backgroundColor: "#2874f0", outline: "none", border: "none" }}>REMOVE</button>
+                        </div>
+                    </div>
+                </Dialog>
+
+                <div id="cartboxouter" style={{ backgroundColor: "#fff" }}>
                     <h4 id="mycart" style={{ textAlign: "left !important" }}>My cart</h4>
                     <div id="cartbox">
                         <img src="https://rukminim2.flixcart.com/www/300/300/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90"></img>
-                        <h2>Your cart is empty!</h2>
-                        <p>Add items to it now.</p>
-                        <Link to="/" id="linkforshop">Shop Now</Link>
+                        {a.userStatus == 'false' ? <>
+                            <h4>Your cart is empty!</h4>
+                            <p>Add items to it now.</p>
+                            <Link to="/" id="linkforshop">Shop Now</Link>
+                        </>
+                            :
+                            <>
+                                <h4>Missing Cart Items?</h4>
+                                <p>Login to see the items you added previously</p>
+                                <Link to="/" id="linkforshop">Home</Link>
+                            </>
+                        }
                     </div>
                 </div>
             </>
             :
             <>
+                <Dialog
+                    open={open} onClose={handleClose}>
+                    <div style={{ width: "380px", height: "190px", borderRadius: "12px", padding: "10px 15px" }}>
+                        <p style={{ fontWeight: "600", height: "40px" }}>Remove Item</p>
+                        <p style={{ color: 'gray' }}>Are you sure you want to remove this item?</p>
+                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
+                            <button onClick={() => setOpen(false)} style={{ padding: "10px 30px", outline: "none" }}>CANCEL</button>
+                            <button onClick={() => removeproduct()} style={{ padding: "10px 30px", color: "white", backgroundColor: "#2874f0", outline: "none", border: "none" }}>REMOVE</button>
+                        </div>
+                    </div>
+                </Dialog>
                 <div id="orderboxouter">
                     <div id="orderbox">
                         <h4>My Cart ({orders.length})</h4>
@@ -60,7 +220,7 @@ const Cart = () => {
                                                 <p style={{ color: "gray", fontSize: "12px" }}>{order.title.shortTitle}</p>
                                                 <p style={{ color: 'gray', fontSize: "14px", height: "9px" }}>Seller:RetailNet <img src={"https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png"} width="38px"></img></p>
                                                 <p><strong>₹{order.price.cost}</strong> &nbsp; <del style={{ color: 'gray' }}>{order.price.mrp}</del> &nbsp; <span style={{ color: "green" }}>{order.discount}</span></p>
-                                                <span><button id="savebtn">SAVE FOR LATER</button><button onClick={() => removeproduct(order.id)} id="rmvbtn">REMOVE</button></span>
+                                                <span><button id="savebtn">SAVE FOR LATER</button><button onClick={() => { setProductid(order.id); setOpen(true) }} id="rmvbtn">REMOVE</button></span>
                                             </div>
                                             <div style={{ width: "35%" }}>
                                                 <p style={{ fontSize: "13px" }}>Delivery by Sun Feb 27 | <span style={{ color: "green" }}>Free</span><del>₹40</del></p>
@@ -73,7 +233,8 @@ const Cart = () => {
                             })
                         }
                         {/* <hr/> */}
-                        <button style={{ float: 'right', backgroundColor: "#fb641b", padding: "17px 55px", outline: "none", border: "none", color: "white" }}>PLACE ORDER</button>
+                        {/* <button onClick={()=>placeMyOrder(price - discount + 40)} style={{ float: 'right', backgroundColor: "#fb641b", padding: "17px 55px", outline: "none", border: "none", color: "white" }}>PLACE ORDER</button> */}
+                        <button onClick={(e) => placeMyOrder(price - discount + 40)} style={{ float: 'right', backgroundColor: "#fb641b", padding: "17px 55px", outline: "none", border: "none", color: "white" }}>PLACE ORDER</button>
                     </div>
                     <div id="paymentbox">
                         <h3>PRICE DETAILS</h3>

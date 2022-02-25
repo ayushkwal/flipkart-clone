@@ -16,6 +16,7 @@ const Header2 = () => {
 
     //getting value of userStatus whether User is Logged in or not
     const a = useContext(userContext);
+    
 
     const outer = {
         color: "#2874f0",
