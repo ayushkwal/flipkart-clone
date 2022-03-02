@@ -5,7 +5,10 @@ const dotenv = require("dotenv");
 const authRoutes = require("./Routes/authRoutes")
 const paymentRoutes = require("./Routes/paymentRoutes")
 const productRoutes = require("./Routes/productRoutes")
-const cors = require('cors')
+const cors = require('cors');
+var cookies = require("cookie-parser");
+
+app.use(cookies());
 
 //Body parser
 var bodyParser = require('body-parser')

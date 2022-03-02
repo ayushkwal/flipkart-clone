@@ -3,7 +3,13 @@ import '../css/ImageView.css'
 import {addToCart} from '../actions/index';
 import { useNavigate } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
+import { useContext } from 'react';
+import userContext from '../context/userContext';
+
 const ImageView = ({ productDet }) => {
+
+    //getting value of userStatus whether User is Logged in or not
+    const a = useContext(userContext);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -11,7 +17,7 @@ const ImageView = ({ productDet }) => {
 
     const addcart = async()=>{
         console.log(productDet.id)
-        dispatch(addToCart(productDet.id));  
+        dispatch(addToCart({id:productDet.id,userid:a.userStatus.userId}));  
         navigate('/cart');
     }
 

@@ -5,14 +5,16 @@ const UserState = (props)=>{
 
     const [userStatus,setUserStatus] = useState({
         status:false,
-        userName:''
+        userName:'',
+        userId:''
     });
 
     const updateUser = (props)=>{
         if(userStatus.status===false){
             setUserStatus({
                 status:true,
-                userName:props
+                userName:props.name,
+                userId:props.id
             })
         }
         else{

@@ -35,6 +35,7 @@ h2,h4{
 #orderboxouter{
     display: flex;
     flex-direction: row;
+    min-height: 96vh;
     
 }
 #paymentbox{

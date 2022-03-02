@@ -3,17 +3,21 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import userContext from '../context/userContext';
+import { useNavigate } from "react-router-dom";
 
-const LoggedIn = ({ name }) => {
+//Copied code from React Material UI
+const MenuBar = () => {
 
+    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
-        a.updateUser()
-    };
+        setAnchorEl(null);
+      };
+   
     
  //getting value of userStatus whether User is Logged in or not
  const a = useContext(userContext);
@@ -28,7 +32,7 @@ const LoggedIn = ({ name }) => {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
             >
-               <p style={{color:"white"}}>{name}</p>
+               <p style={{color:"white",fontSize:"14px",marginLeft:"10px",marginRight:"10px",textTransform:"lowercase"}}><span style={{textTransform:"uppercase"}}>M</span>ore</p>
             </Button>
             <Menu
                 id="basic-menu"
@@ -39,10 +43,14 @@ const LoggedIn = ({ name }) => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem> */}
-                <MenuItem onClick={handleClose}><p onClick={()=>a.updateUser()}>Logout</p></MenuItem>
+                <MenuItem style={{width:"200px",fontSize:"14px"}} >Notification Preferences</MenuItem>
+                <MenuItem style={{width:"200px",fontSize:"14px"}}>Sell On flipkart</MenuItem>
+                <MenuItem style={{width:"200px",fontSize:"14px"}}>24x7 Customer Care</MenuItem>
+                <MenuItem style={{width:"200px",fontSize:"14px"}}>Advertise</MenuItem>
+                <MenuItem style={{width:"200px",fontSize:"14px"}} onClick={()=>navigate('/downloadapp')}>Download App</MenuItem>
             </Menu>
+
+
         </div>
     );
 
@@ -62,4 +70,4 @@ const LoggedIn = ({ name }) => {
 
 
 }
-export default LoggedIn
+export default MenuBar

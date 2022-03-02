@@ -4,12 +4,14 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom'
 import Dialog from '@mui/material/Dialog';
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../actions";
+import { removeFromCart,removeFromCartAllProduct } from "../actions/index";
 import Axios from 'axios'
 import userContext from '../context/userContext';
+import { useNavigate } from "react-router-dom";
+
 const Cart = () => {
 
-
+    const navigate = useNavigate();
     //getting value of userStatus whether User is Logged in or not
     const a = useContext(userContext);
     console.log(a, 'is user status')
@@ -22,6 +24,7 @@ const Cart = () => {
     const [productid, setProductid] = useState('');
     const [open, setOpen] = useState(false);
     const [removecondition, setRemovecondition] = useState(false);
+    const [savedOrder,setSavedOrder] = useState('')
     useEffect(() => {
         var priceNow = 0, discountNow = 0;
         orders.map((order) => {
@@ -37,7 +40,7 @@ const Cart = () => {
 
     const removeproduct = () => {
 
-        dispatch(removeFromCart(productid));
+        dispatch(removeFromCart({id:productid,userid:a.userStatus.userId}));
         setOpen(false)
 
     }
@@ -45,124 +48,80 @@ const Cart = () => {
         setOpen(false)
     }
 
-    // const paymentHandler = async (e) => {
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-        const placeMyOrder = async (mrp) => {
-   
-   
+    const placeMyOrder = async (mrp) => {
+
+        if(!a.userStatus.status){
+           return alert('For placing your order, you need to first Log In')
+        }
         const API_URL = `http://localhost:5000/`
-        const orderUrl = `${API_URL}order`;
+        const orderUrl = `${API_URL}order/${mrp}`;
         const response = await Axios.get(orderUrl);
         const { data } = response;
         console.log("App -> razorPayPaymentHandler -> data", data)
         console.log("response", response)
-        
+
         const options = {
-          key: 'rzp_test_oj6JRa6Lzk7GO2',
-          name: "avdojo",
-          description: "avodojo",
-        //   order_id: data.id,
-          handler: async (response) => {
-            try {
-             const paymentId = response.razorpay_payment_id;
-             const url = `${API_URL}capture/${paymentId}`;
-             const captureResponse = await Axios.post(url, {})
-             const successObj = JSON.parse(captureResponse.data)
-             const captured = successObj.captured;
-             console.log("App -> razorPayPaymentHandler -> captured", successObj)
-             if(captured){
-                 console.log('success')
-             }
-             
-            } catch (err) {
-              console.log(err);
-            }
-          },
-          theme: {
-            color: "#686CFD",
-          },
+            key: 'rzp_test_oj6JRa6Lzk7GO2',
+            name: "Flipkart",
+            description: "We are feeling lucky to have a customer like you.",
+            order_id: data.id,
+            handler: async (response) => {
+                try {
+                    const paymentId = response.razorpay_payment_id;
+                    const url = `${API_URL}capture/${paymentId}`;
+                    const captureResponse = await Axios.post(url, { mrp: mrp })
+                    const successObj = JSON.parse(captureResponse.data)
+                    const captured = successObj.captured;
+                    console.log("App -> razorPayPaymentHandler -> captured", successObj)
+                    if (captured) {
+                        console.log('success')
+                       await fetch('/orderplace',{
+                            method:'post',
+                            headers:{
+                                'content-type':'application/json'
+                            },
+                            body:JSON.stringify({
+                                id:a.userStatus.userId 
+                            })
+                        }).then((res)=>{
+                            return res.json();
+                        }).then((data)=>{
+                            setSavedOrder(data.id)
+                            console.log(data)
+                        })
+                        dispatch(removeFromCartAllProduct({userid:a.userStatus.userId})).then(()=>{
+                            navigate('/Thankyou', {
+                                state: {
+                                  userId: savedOrder,
+                                }
+                              })
+                        }).catch(err=>{
+                            console.log(err)
+                        })
+
+
+                    }
+
+                } catch (err) {
+                    console.log(err);
+                }
+            },
+            theme: {
+                color: "#686CFD",
+            },
         };
         const rzp1 = new window.Razorpay(options);
         // rzp1.createPayment(options);
         rzp1.open();
-   
+
     }
-   
-    // const placeMyOrder = async (mrp) => {
-
-    //     const response = await fetch(`/order/${mrp}`,{
-    //         method:'post',
-            
-    //     });
-    //     const { data } = response;
-    //     const options = {
-    //         key: 'rzp_test_oj6JRa6Lzk7GO2',
-    //         name: "FlipkartClone",
-    //         description: "Thankyou for ordering from flipkartclone. We are always happy to provide you the fast, secure and door-step service.",
-
-    //         handler: async (response) => {
-    //             try {
-    //                 const paymentId = response.razorpay_payment_id;
-    //                 console.log(paymentId,'is pid')
-    //                 const url = `/capture/${paymentId}`;
-    //                 const captureResponse = await fetch(url, {
-    //                     method: 'post'
-                        
-                        
-    //                 })
-    //                 console.log(captureResponse.data);
-    //             } catch (err) {
-    //                 console.log(err);
-    //             }
-    //         },
-    //         theme: {
-    //             color: "rgb(251, 100, 27)",
-    //         },
-    //     };
-    //     const rzp1 = new window.Razorpay(options);
-    //     rzp1.open();
-    // };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     return (
         orders.length == 0 ?
             <>
 
                 <Dialog
-                    open={open} onClose={handleClose}>
+                    open={open} onClose={handleClose}> 
                     <div style={{ width: "380px", height: "190px", borderRadius: "12px", padding: "10px 15px" }}>
                         <p style={{ fontWeight: "600", height: "40px" }}>Remove Item</p>
                         <p style={{ color: 'gray' }}>Are you sure you want to remove this item?</p>
@@ -250,8 +209,9 @@ const Cart = () => {
                             <hr />
                         </div>
                     </div>
-
+                   
                 </div>
+       
             </>
     )
 }

@@ -1,0 +1,125 @@
+*{
+    /* color: aliceblue; */
+    padding: 0;
+    /* margin: 0; */
+}
+.box1{
+    width:100%;
+    height:250px;
+    display: flex;
+    /* border: 2px solid red; */
+    background-color:#172337;
+    justify-content: space-around;
+    text-align: left;
+    
+    
+}
+.box2{
+    width:100%;
+    height:50px;
+display: flex;
+text-align: center;
+/* border: 2px solid red; */
+background-color: #172337;
+align-items:center ;
+justify-content: space-around;
+/* text-align: left; */
+
+
+}
+#h4tag{
+    height:10px;
+    color: #878787;
+    font-size: 12px;
+    font-weight: 500;
+}
+.container{
+    width:100%;
+    height:300px;
+    background-color:#172337;
+    margin-bottom:55px;
+    
+        
+}
+.about{
+    font-size: 12px;
+    height:170px;
+    width: 10%;
+    /* border: 2px solid rebeccapurple; */
+    float: left;
+    padding: 15px;
+    text-align:left; 
+    max-height: fit-content;
+}
+.help{
+    font-size: 12px;
+    height:170px;
+    width: 10%;
+    /* border: 2px solid rebeccapurple; */
+    float: left;
+    padding: 15px;
+    text-align:left; 
+    max-height: fit-content;
+}
+.policy{
+    font-size: 12px;
+    height:170px;
+    width: 10%;
+    /* border: 2px solid rebeccapurple; */
+    float: left;
+    padding: 15px;
+    text-align:left; 
+    max-height: fit-content;   
+}
+.social{
+        font-size: 12px;
+        height:170px;
+        /* border: 2px solid rebeccapurple; */
+        float: left;
+        width: 10%;
+        padding: 15px;
+        text-align:left; 
+        max-height: fit-content;
+}
+.mail{
+        font-size: 12px;
+        height:170px;
+        /* border: 2px solid rebeccapurple; */
+        float: left;
+        width: 15%;
+        padding: 15px;
+        text-align:left; 
+        max-height: fit-content;
+
+}
+.office{
+    font-size: 12px;
+    height:170px;
+    /* border: 2px solid rebeccapurple; */
+    float: left;
+    width: 16%;
+    padding: 15px;
+    text-align:left; 
+    max-height: fit-content;
+
+}
+.box1 hr{
+    height: 125px;
+    margin: 35px -13px;
+    /* font-size: smaller; */
+    /* border: none; */
+
+}
+ul{
+    list-style: none;
+}
+#ftrcnt{
+    font-size: 13px;
+    color:white
+}
+ul li{
+    color:white
+}
+h4{
+    height:32px
+}

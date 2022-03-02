@@ -10,7 +10,9 @@ import Cart from './components/Cart';
 import Home from './components/Home';
 import UserState from "./context/UserState";
 import Product from "./components/Product";
-
+import Thankyou from './components/Thankyou';
+import DownloadApp from "./components/DownloadApp";
+import Footer from "./components/Footer"
 
 const App = () => {
   return (
@@ -22,7 +24,10 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="/thankyou" element={<Thankyou />} />
+          <Route path="/downloadapp" element={<DownloadApp />} />
         </Routes>
+      <Footer />
       </BrowserRouter>
       </UserState>
     </>
