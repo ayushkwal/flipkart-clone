@@ -12,6 +12,7 @@ import UserState from "./context/UserState";
 import Product from "./components/Product";
 import Thankyou from './components/Thankyou';
 import DownloadApp from "./components/DownloadApp";
+import Orders from "./components/MyOrders"
 import Footer from "./components/Footer"
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="cart" element={<Cart />} />
           <Route path="/thankyou" element={<Thankyou />} />
           <Route path="/downloadapp" element={<DownloadApp />} />
+          <Route path="/myorders" element={<Orders />} />
         </Routes>
       <Footer />
       </BrowserRouter>

@@ -1,0 +1,104 @@
+
+
+    #outer{
+        color: "#2874f0",
+        background-color: #2874f0,
+        height 55px,
+        fontFamily Sans-Serif,
+
+
+    };
+    #inner {
+        color #2874f0,
+        width 90%,
+        height 55px,
+        fontFamily Sans-Serif,
+        // margin auto,
+        float right,
+        display flex,
+        flexDirection row,
+        alignItems center
+    };
+    #logodiv {
+        width 85px,
+        height 75px,
+        textDecoration none,
+
+    };
+    #logo {
+        width 75px,
+        margin auto,
+        paddingTop 20px,
+    };
+    #explore {
+        padding 0px,
+        margin 0px,
+        color white,
+        fontSize 13px,
+        marginTop -7px,
+        fontFamily cursive
+    };
+    #searchbar {
+        height 22px,
+        width 43vw,
+        marginRight 20px,
+        marginLeft 12px,
+        padding 4px,
+        // marginTop80px
+    };
+    #login {
+        padding 4px 8px,
+        color #2874f0,
+        backgroundColor white,
+
+    };
+    #loginleft {
+        height 40vh,
+        backgroundColor #2874f0,
+        width 35vw,
+
+    };
+    #loginDialog {
+        display flex,
+        flexDirection row,
+    };
+    #loginRight {
+        display flex,
+        flexDirection column,
+        padding 30px 4px,
+        justifyContent space-around,
+        margin 3px 78px
+    };
+    #newbtn {
+        outline none,
+        border none,
+        color #2874f0
+    };
+    #yellowLogin {
+        background #fb641b,
+        boxShadow 0 1px 2px 0 rgb(0 0 0 / 20%),
+        border none,
+        color #fff,
+        padding 10px 20px
+    };
+    #input {
+        outline none,
+        border none,
+        borderBottom 1px solid #2874f0
+    };
+    #tnc {
+        color gray,
+        fontSize 12px
+    };
+    #loginHeaderBtn {
+        padding 4px 35px,
+        outline none,
+        color #2874f0,
+        fontWeight 700,
+        backgroundColor #fff,
+        cursor pointer,
+        borderRadius 2px,
+        height 32px,
+        padding 5px 40px,
+        border 1px solid #dbdbdb
+    };

@@ -48,6 +48,8 @@ const MenuBar = () => {
                 <MenuItem style={{width:"200px",fontSize:"14px"}}>24x7 Customer Care</MenuItem>
                 <MenuItem style={{width:"200px",fontSize:"14px"}}>Advertise</MenuItem>
                 <MenuItem style={{width:"200px",fontSize:"14px"}} onClick={()=>navigate('/downloadapp')}>Download App</MenuItem>
+                <MenuItem style={{width:"200px",fontSize:"14px"}} onClick={()=>navigate('/myorders')}>Your Orders</MenuItem>
+
             </Menu>
 
 

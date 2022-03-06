@@ -33,6 +33,16 @@ router.post('/searchpro',async(req,res)=>{
     return res.json(Sproducts);
 })
 
+router.post('/allorders',async(req,res)=>{
+    if(req.body.id==''){
+        return res.json([])
+    }
+    const order =await Order.find({user_id:req.body.id});
+    console.log(order)
+    return res.json(order);
+    
+})
+
 
 router.post('/addproducttodb',async(req,res)=>{
     if(req.body.user_id!=''){

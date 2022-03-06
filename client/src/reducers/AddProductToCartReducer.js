@@ -1,7 +1,7 @@
 const initialState = [];
 const GetProductDetailsReducer = (state = initialState, action) => {
 
-    console.log('reached here')
+    // console.log('reached here')
     switch (action.type) {
         case "ADD_PRODUCT_TO_CART_DETAILS":
             const item = action.payload;

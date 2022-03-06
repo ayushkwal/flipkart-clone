@@ -51,7 +51,7 @@ const ProductBanner = () => {
       {
         products.map((p) => {
           return (
-            <Link to={`/product/${p.id}`} style={{textDecoration:"none",color:"gray"}}>
+            <Link to={`/product/${p.id}`} key={"p"} style={{textDecoration:"none",color:"gray"}}>
             <div style={productDetail}>
               <img style={{ height: "120px", marginBottom: "30px" }} src={p.url}></img>
               <div >{p.title.shortTitle}</div>

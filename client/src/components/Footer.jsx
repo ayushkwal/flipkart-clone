@@ -19,10 +19,6 @@ const Footer = ()=>{
                 <li>Press</li>
                 <li>Flipkart Wholesale</li>
                 <li>Corporate Information</li>
-                <li>Flipkart Stories</li>
-                <li>Press</li>
-                <li>Flipkart Wholesale</li>
-                <li>Corporate Information</li>
             </ul>
         </div>
 
@@ -31,13 +27,13 @@ const Footer = ()=>{
             <ul>
                 <h4 id="h4tag">HELP</h4>
             
-                <li>Contact Us</li>
-                <li>About Us</li>
+                <li>Payment</li>
+                <li>Shipping</li>
                 <li>Careers</li>
-                <li>Flipkart Stories</li>
+                <li>Cancellation</li>
                 <li>Press</li>
-                <li>Flipkart Wholesale</li>
-                <li>Corporate Information</li>
+                <li>FAQ</li>
+                <li>Report Infringement</li>
             </ul>
         </div>
 
@@ -45,16 +41,12 @@ const Footer = ()=>{
             <ul>
                 <h4 id="h4tag">POLICY</h4>
                 
-                <li>Contact Us</li>
-                <li>About Us</li>
-                <li>Careers</li>
-                <li>Flipkart Stories</li>
-                <li>Press</li>
-                <li>Flipkart Wholesale</li>
-                <li>Careers</li>
-                <li>Flipkart Stories</li>
-                <li>Press</li>
-                <li>Corporate Information</li>
+                <li>Return Policy</li>
+                <li>Terms of use</li>
+                <li>Security</li>
+                <li>Privacy</li>
+                <li>Sitemap</li>
+                <li>EPR Compliance</li>
             </ul>
         </div>    
 
@@ -62,13 +54,9 @@ const Footer = ()=>{
             <ul>
                 <h4 id="h4tag">SOCIAL</h4>
                 
-                <li>Contact Us</li>
-                <li>About Us</li>
-                <li>Careers</li>
-                <li>Flipkart Stories</li>
-                <li>Press</li>
-                <li>Flipkart Wholesale</li>
-                <li>Corporate Information</li>
+                <li>Facebook</li>
+                <li>Twitter</li>
+                <li>Instagram</li>
             </ul>
         </div>
         <hr />

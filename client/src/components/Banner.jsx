@@ -66,8 +66,8 @@ const Banner = () => {
       }}
       className={classes.carousel}
     >
-      {bannerData.map((item) => (
-        <img src={item} alt="" className={classes.image} />
+      {bannerData.map((item,i) => (
+        <img key={i} src={item} alt="" className={classes.image} />
       ))}
     </Carousel>
   );
